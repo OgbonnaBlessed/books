@@ -1,9 +1,11 @@
-
+import Footer from "./Components/Footer";
+import ParentComponent from "./Components/ParentComponent";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hell0</h1>
+      <ParentComponent />
+      <Footer />
     </div>
   );
 }
