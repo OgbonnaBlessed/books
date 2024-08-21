@@ -1,10 +1,11 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import { FaHeart, FaSearch, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHeart, FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom"
 import { WishListContext } from './WishListContext';
 import { CartContext } from './CartContext';
 import products from './Data.json';
+import {BsThreeDotsVertical} from 'react-icons/bs'
 
 const Navbar = ({ onCategorySelect, onSearch }) => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -15,9 +16,29 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
     const [search, setSearch] = useState('');
     const [filteredAuthors, setFilteredAuthors] = useState([]);
     const [filteredBookNames, setFilteredBookNames] = useState([]);
+    const [open, setOpen] = useState(false);
+
+    const toggleOpen = () => {
+        setOpen(!open);
+    }
 
     const dropDownRef = useRef(null);
     const searchRef = useRef(null);
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !event.target.classList.contains('show-sidebar')) {
+            setOpen(false);
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -87,10 +108,9 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
                     <img src={`${process.env.PUBLIC_URL}/icon.png`} alt="Company logo" />
                     <h2>BookField</h2>
                 </Link>
-                <FaBars className='show-sidebar' />
+                <BsThreeDotsVertical className='show-sidebar' onClick={toggleOpen} />
 
-                <div className="right-side-content">
-                    <FaTimes className='close-sidebar' />
+                <div className={`right-side-content ${open ? 'show' : 'none'}`} ref={sidebarRef}>
                     <nav>
                         <NavLink to="/Trending">Trending</NavLink>
                         <NavLink to="/Deals-for-Today">Deals for today</NavLink>
