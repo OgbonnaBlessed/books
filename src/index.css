@@ -410,12 +410,6 @@ button:active {
   transition: all .5s ease;
 }
 
-/* .trending-item button:hover,
-.best-sellers-item button:hover,
-.deals-item button:hover {
-  box-shadow: 0 0 1rem var(--primary-color);
-} */
-
 .trending-item .price,
 .best-sellers-item .price {
   font-size: 1.5rem;
@@ -488,7 +482,15 @@ input:focus {
 .deals-main-box {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
+  place-content: center;
+  row-gap: 3rem;
+}
+
+.trending-main-box .trending-item,
+.best-sellers-main-box .best-sellers-item,
+.deals-main-box .deals-item {
+  /* width: 15rem; */
 }
 
 .preview-container {
@@ -567,6 +569,7 @@ input:focus {
   justify-content: center;
   width: 100%;
   position: relative;
+  row-gap: 3rem;
 }
 
 .wish-item {
@@ -840,13 +843,6 @@ input:focus {
 .search-results {
   width: 100%;
   margin-top: 6rem;
-  min-height: 67.5vh;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
 }
 
 .search-results h1 {
@@ -857,26 +853,27 @@ input:focus {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 0 10px;
 }
 
 .search-item {
-  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 2px;
   position: relative;
+  padding: 0 1rem;
   padding-bottom: 20px;
-}
-
-.search-item .description {
-  width: 50%;
+  width: 15rem;
 }
 
 .search-item button {
   border-radius: 20px;
-  width: 400px;
+  width: 100%;
   padding: 10px 0;
   margin-top: 5px;
   border: 0;
@@ -887,14 +884,13 @@ input:focus {
 }
 
 .search-image {
-  width: 12rem;
-  position: relative;
+  width: 100%;
   border-radius: 10px;
 }
 
 .search-item .heart-icon {
   position: absolute;
-  right: 15rem;
+  right: 1.3rem;
   top: 5px;
   border-radius: 50%;
   background: var(--secondary-color);
@@ -1057,13 +1053,28 @@ input:focus {
   .best-sellers-main-box .product-image,
   .deals-main-box .product-image,
   .wish-item-container .wish-product-image {
-    height: 28rem;
+    height: 20rem;
+    position: relative;
   }
 
   .trending-main-container .trending-container h1,
   .best-sellers-main-container .best-sellers-container h1,
   .deals-main-container .deals-container h1 {
     font-size: 1.5rem;
+  }
+
+  .trending-main-container .trending-item,
+  .best-sellers-main-container .best-sellers-item,
+  .deals-main-container .deals-item,
+  .wish-container .wish-item {
+    padding: 0 3rem;
+  }
+
+  .trending-main-container .trending-item .heart-icon,
+  .best-sellers-main-container .best-sellers-item .heart-icon,
+  .deals-main-container .deals-item .heart-icon {
+    position: absolute;
+    right: 3.5rem;
   }
 
   .deals-main-container .deals-container .display-deals {
@@ -1100,5 +1111,13 @@ input:focus {
 
   .product-details img {
     width: 7rem;
+  }
+
+  .search-results h1 {
+    font-size: 1.5rem;
+  }
+
+  .Footer {
+    font-size: 0.5rem;
   }
 }

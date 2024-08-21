@@ -222,8 +222,8 @@ const Content = ({ selectedCategory, searchQuery }) => {
 
     {searchQuery 
     && <div className="search-results">
-            <h1>Search Results for "{searchQuery}"</h1>
             <div className="search-results-box">
+            <h1>Search Results for "{searchQuery}"</h1>
                 {filteredProducts.map(product => (
                     <div key={product.id} className="search-item">
                         <img className='search-image' src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
