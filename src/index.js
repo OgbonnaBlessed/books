@@ -17,18 +17,18 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <WishListProvider>
     <CartProvider>
-    <Router>
-      <ScrollToTop/>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/Trending" element={<Trending />} />
-        <Route path="/Deals-for-Today" element={<Deals />} />
-        <Route path="/Best-sellers" element={<Best />} />
-        <Route path="/Preview/:productId" element={<Preview />} />
-        <Route path="/Wish-list" element={<WishList />} />
-        <Route path="/Checkout" element={<Checkout />} />
+      <Router>
+        <ScrollToTop/>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/Trending" element={<Trending />} />
+          <Route path="/Deals-for-Today" element={<Deals />} />
+          <Route path="/Best-sellers" element={<Best />} />
+          <Route path="/Preview/:productId" element={<Preview />} />
+          <Route path="/Wish-list" element={<WishList />} />
+          <Route path="/Checkout" element={<Checkout />} />
         </Routes>
-    </Router>
+      </Router>
     </CartProvider>
   </WishListProvider>
 );
