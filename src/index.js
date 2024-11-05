@@ -8,8 +8,8 @@ import Best from './Pages/Best';
 import Deals from './Pages/Deals';
 import Preview from './Pages/Preview';
 import WishList from './Pages/WishList';
-import { WishListProvider } from './Components/WishListContext';
-import { CartProvider } from './Components/CartContext';
+import { WishListProvider } from './Context/WishListContext';
+import { CartProvider } from './Context/CartContext';
 import Checkout from './Pages/Checkout';
 import ScrollToTop from './Components/ScrollToTop';
 

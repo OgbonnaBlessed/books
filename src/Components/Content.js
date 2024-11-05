@@ -1,5 +1,5 @@
 import React from 'react';
-import products from "./Data.json"
+import products from "../Data/Data.json"
 import BookSwiper from './BookSwiper';
 import Footer from './Footer';
 import ProductCard from './ProductCard';

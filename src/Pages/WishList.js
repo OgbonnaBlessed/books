@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../Components/Navbar';
-import { WishListContext } from '../Components/WishListContext';
+import { WishListContext } from '../Context/WishListContext';
+import formatCurrency from '../utils/format';
 
 const WishList = () => {
     const [wishes, setWishes] = useState([]);
@@ -40,7 +41,7 @@ const WishList = () => {
                                         <div className='product-rating-count'>{wish.rating.count}</div>
                                     </div>
                                     <div className="price-box">
-                                        <p className='price'>${wish.priceCents}</p> 
+                                        <p className='price'>${formatCurrency(wish.priceCents)}</p> 
                                         {wish.discount && <p className='discount'>{wish.discount}</p>}
                                     </div>
                                     <div className="product-quantity-container">

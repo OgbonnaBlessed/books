@@ -3,8 +3,8 @@ import { FaHeart } from 'react-icons/fa';
 import Navbar from '../Components/Navbar';
 import products from "../Data/Data.json";
 import { useParams } from 'react-router-dom';
-import { WishListContext } from '../Components/WishListContext'; // Import the context
-import { CartContext } from '../Components/CartContext';
+import { WishListContext } from '../Context/WishListContext'; // Import the context
+import { CartContext } from '../Context/CartContext';
 import ProductCard from '../Components/ProductCard';
 import formatCurrency from '../utils/format';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import products from '../Components/Data.json'
+import products from '../Data/Data.json'
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import ProductCard from '../Components/ProductCard';

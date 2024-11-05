@@ -307,57 +307,141 @@ button:active {
 
 .carousel-container {
   width: 100%;
-  height: 20rem;
+  height: auto;
   position: relative;
-  top: 4.5rem;
-  z-index: -1;
-  pointer-events: none;
-  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 2rem;
+  margin-top: 6rem;
 }
 
-.carousel {
-  position: relative;
+.carousel-main {
+  display: flex;
+  gap: 2rem;
+  align-items: end;
+}
+
+.carousel-image {
+  width: 14rem;
+  height: 20rem;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.carousel-image img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.carousel-details h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.carousel-details h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.description-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-details p {
+  font-size: 1rem;
+  color: #ffffff;
+  width: 20rem;
+}
+
+.description-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.round-end {
+  width: 20px;
+  height: 20px;
+  border: 5px solid var(--primary-color);
+  border-radius: 50%;
+  background-color: yellowgreen;
+}
+
+.thin-center {
+  background-color: var(--primary-color);
+  width: 2px;
+}
+
+.thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.quote-box {
+  position: relative;
+  background: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #ffff;
+  font-style: italic;
+  font-size: 1.2rem;
+  max-width: 18rem;
+}
+
+.top-quotation-mark, .bottom-quotation-mark {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.top-quotation-mark {
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+}
+
+.bottom-quotation-mark {
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+}
+
+/* Thumbnail slider */
+.carousel-thumbnail-slider {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem;
+}
+
+.thumbnail {
+  width: 4rem;
+  height: 5rem;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+  border-radius: 5px;
   overflow: hidden;
 }
 
-.carousel-inner {
-  position: absolute;
+.thumbnail img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.carousel-item {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: 100%;
-  /* object-fit: fill; */
-}
-
-.carousel-item.active {
+.thumbnail.active-thumbnail {
+  transform: scale(1.15);
   opacity: 1;
-}
-
-.carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  /* z-index: 5; */
-  border-radius: 50%;
-  padding: 7px 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .content-container {
@@ -529,12 +613,6 @@ input:focus {
   /* gap: 1.5rem; */
   place-content: center;
   row-gap: 3rem;
-}
-
-.trending-main-box .trending-item,
-.best-sellers-main-box .best-sellers-item,
-.deals-main-box .deals-item {
-  /* width: 15rem; */
 }
 
 .preview-container {

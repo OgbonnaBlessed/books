@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '../Components/ProductCard'
-import products from '../Components/Data.json'
+import products from '../Data/Data.json'
 import Navbar from '../Components/Navbar';
 
 const Trending = () => {

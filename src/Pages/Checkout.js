@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Navbar from '../Components/Navbar';
-import { CartContext } from '../Components/CartContext';
+import { CartContext } from '../Context/CartContext';
 
 const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState({});

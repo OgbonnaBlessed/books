@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import formatCurrency from '../utils/format';
 import { FaHeart } from 'react-icons/fa';
-import { WishListContext } from './WishListContext'; 
-import { CartContext } from './CartContext';
+import { WishListContext } from '../Context/WishListContext'; 
+import { CartContext } from '../Context/CartContext';
 
 const ProductCard = ({ item }) => {
     const [clickedItems, setClickedItems] = useState(false);

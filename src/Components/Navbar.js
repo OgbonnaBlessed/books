@@ -2,9 +2,9 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { FaHeart, FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom"
-import { WishListContext } from './WishListContext';
-import { CartContext } from './CartContext';
-import products from './Data.json';
+import { WishListContext } from '../Context/WishListContext';
+import { CartContext } from '../Context/CartContext';
+import products from '../Data/Data.json';
 import {BsThreeDotsVertical} from 'react-icons/bs'
 
 const Navbar = ({ onCategorySelect, onSearch }) => {
