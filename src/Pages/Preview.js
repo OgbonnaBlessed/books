@@ -1,57 +1,113 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
+import products from "../Data/Data.json";
+import { useParams } from 'react-router-dom';
+import { WishListContext } from '../Components/WishListContext'; // Import the context
+import { CartContext } from '../Components/CartContext';
+import ProductCard from '../Components/ProductCard';
+import formatCurrency from '../utils/format';
 
 const Preview = () => {
-    const [clicked, setClicked] = useState(false);
+    const [clickedItems, setClickedItems] = useState({});
+    const [quantity, setQuantity] = useState(1); // Initialize quantity as 1
+    const { addToWishList, removeFromWishList } = useContext(WishListContext); // Use the context
+    const { handleAddToCart } = useContext(CartContext);
+    const { productId } = useParams();
 
-    const handleClick = () => {
-        setClicked(prevState => !prevState);
-    }
+    const handleAddToCartClick = (product) => {
+        const productWithQuantity = { ...product, quantity }; 
+        handleAddToCart(productWithQuantity); 
+    };
 
-  return (
-    <>
-    <Navbar />
-     <div className="preview-container">
-            <div className="preview-item">
-                <img className='preview-image' src={`${process.env.PUBLIC_URL}/images/Trending/view1.jpg`} alt="" />
-                <h1 className='title'>Book Title by <i>Ogbonna Blessed</i></h1>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores laudantium distinctio sequi incidunt iste maxime corporis amet perspiciatis nostrum libero commodi rerum voluptas aliquam minima placeat harum rem quidem dolorem assumenda eos, unde alias odit! Vero voluptatum ad maxime, et architecto eaque quibusdam dicta omnis temporibus cupiditate quas voluptas enim!
-                </p>
-                <div className="rating-box">
-                    <img className='product-rating-stars' src={`${process.env.PUBLIC_URL}/images/ratings/rating-20.png`} alt="" />
-                    <div className='product-rating-count'>127</div>
-                </div>
-                <div className="price">$1342</div>
-                <div class="product-quantity-container">
-                    <select class = "quantity-selector">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <button type="button">Add to cart</button>
-                <FaHeart 
-                    className='preview-heart-icon' 
-                    onClick={handleClick}
-                    style={{
-                        color: clicked ? 'rgba(255, 240, 31, 0.87)' : 'white'
-                    }}
-                />
+    const handleClick = (product) => {
+        const newClickedState = !clickedItems[product.id];
+
+        setClickedItems((prevState) => {
+            const updatedState = {
+                ...prevState,
+                [product.id]: newClickedState,
+            };
+            localStorage.setItem('clickedItems', JSON.stringify(updatedState));
+            return updatedState;
+        });
+
+        if (newClickedState) {
+            addToWishList(product);
+        } else {
+            removeFromWishList(product.id);
+        }
+    };
+
+    // Find the specific product by ID
+    const product = products.find((product) => product.id === productId);
+
+    // If product is found, filter related products by category
+    const related_products = product
+        ? products.filter((item) => item.category[1] === product.category[1] && item.id !== product.id)
+        : [];
+
+        console.log(related_products);
+
+    return (
+        <>
+            <Navbar />
+            <div className="preview-container">
+                {product && (
+                    <div className="preview-item">
+                        <div className="preview-images">
+                            <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
+                            <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
+                        </div>
+                        <div className='preview-product-info'>
+                            <h1 className="title">{product.name}</h1>
+                            <h1>{product.author}</h1>
+                            <p className="preview-description">{product.description}</p>
+                            <div className="preview-rating-box">
+                                <img className="product-rating-stars" src={`${process.env.PUBLIC_URL}/${product.rating.stars}`} alt="" />
+                                <div className="product-rating-count">{product.rating.count}</div>
+                            </div>
+                            <div className="preview-price">${formatCurrency(product.priceCents)}</div>
+                            <div className="preview-quantity-container">
+                                <select
+                                    className="quantity-selector"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                >
+                                    {[...Array(10).keys()].map((n) => (
+                                        <option key={n + 1} value={n + 1}>{n + 1}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='product-preview-actions'>
+                                <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button>
+                                <FaHeart
+                                    className="preview-heart-icon"
+                                    onClick={() => handleClick(product)}
+                                    style={{
+                                        color: clickedItems[product.id] ? 'rgb(219, 21, 21)' : 'white',
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-     </div> 
-     <Footer />
-    </>
-  )
-}
 
-export default Preview
+            {/* Related Products Section */}
+            <div className="related-products-container">
+                <h1>Similar Books</h1>
+                {related_products.length > 0 
+                ?   <div className="trending-box trending-main-box">
+                        {related_products.map((item) => (
+                            <ProductCard key={item.id} item={item} />
+                        ))}
+                    </div>
+                : <p className='no-similarity'>There's no book similar to this currently!</p>
+                }
+            </div>
+        </>
+    );
+};
+
+export default Preview;

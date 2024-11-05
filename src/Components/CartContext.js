@@ -10,25 +10,28 @@ export const CartProvider = ({ children }) => {
         setCart(savedCart);
     }, []);
 
-    const handleAddToCart = (product, quantity) => {
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]); // Save to localStorage whenever cart changes
+
+    const handleAddToCart = (product) => {
         const existingProductIndex = cart.findIndex(item => item.id === product.id);
         if (existingProductIndex > -1) {
             const updatedCart = cart.map((item, index) =>
                 index === existingProductIndex
-                    ? { ...item, quantity: item.quantity + quantity }
+                    ? { ...item, quantity: item.quantity + product.quantity } // Add new quantity
                     : item
             );
             setCart(updatedCart);
+            
         } else {
-            setCart(prevCart => [...prevCart, { ...product, quantity }]);
+            setCart(prevCart => [...prevCart, product]);
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
     };
 
     const handleDeleteItem = (productId) => {
         const updatedCart = cart.filter(item => item.id !== productId);
         setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
     const handleUpdateQuantity = (productId, newQuantity) => {
@@ -38,10 +41,7 @@ export const CartProvider = ({ children }) => {
                 : item
         );
         setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
-
-    // const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0)
 
     return (
         <CartContext.Provider value={{ cart, handleAddToCart, handleDeleteItem, handleUpdateQuantity }}>

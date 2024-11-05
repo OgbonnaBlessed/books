@@ -45,6 +45,10 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setSearchDropDown(false);
             }
+
+            if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+                setDropDown(false);
+            }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -116,13 +120,13 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
                         <NavLink to="/Deals-for-Today">Deals for today</NavLink>
                         <NavLink to="/Best-sellers">Best sellers</NavLink>
                     </nav>
-                    <div className="categories-box">
+                    <div className="categories-box" ref={dropDownRef}>
                         <button type="button" onClick={toggleDropdown}>
                             <p>{selectedCategory}</p>
                             <MdArrowDropDown size={20} />
                         </button>
                         {dropDown && (
-                            <div className="categories-list" ref={dropDownRef}>
+                            <div className={`categories-list ${dropDown ? 'active-drop-down' : 'inactive-drop-down'}`}>
                                 <ul>
                                     <li onClick={() => selectCategory('All')}>All</li>
                                     <li onClick={() => selectCategory('Fiction')}>Fiction</li>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
 import { WishListContext } from '../Components/WishListContext';
 
 const WishList = () => {
@@ -36,7 +35,6 @@ const WishList = () => {
                                 <div key={index} className="wish-item">
                                     <img className='wish-product-image' src={`${process.env.PUBLIC_URL}/${wish.image}`} alt="" />
                                     <h3>{wish.name} by <i>{wish.author}</i></h3>
-                                    <p>{wish.description}</p>
                                     <div className="rating-box">
                                         <img className='product-rating-stars' src={`${process.env.PUBLIC_URL}/${wish.rating.stars}`} alt="" />
                                         <div className='product-rating-count'>{wish.rating.count}</div>
@@ -68,7 +66,6 @@ const WishList = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };
