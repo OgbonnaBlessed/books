@@ -7,7 +7,7 @@ import { WishListContext } from '../Context/WishListContext'; // Import the cont
 import { CartContext } from '../Context/CartContext';
 import ProductCard from '../Components/ProductCard';
 import formatCurrency from '../utils/format';
-import { AlignRight, ArrowRight, ChevronRight, MoveRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 const Preview = () => {
     const [clickedItems, setClickedItems] = useState({});
