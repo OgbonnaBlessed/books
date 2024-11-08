@@ -1,15 +1,13 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { FaHeart, FaSearch, FaShoppingCart } from 'react-icons/fa';
-import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom"
 import { WishListContext } from '../Context/WishListContext';
 import { CartContext } from '../Context/CartContext';
 import products from '../Data/Data.json';
-import {BsThreeDotsVertical} from 'react-icons/bs'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ onCategorySelect, onSearch }) => {
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [dropDown, setDropDown] = useState(false);
+const Navbar = () => {
     const { wishes } = useContext(WishListContext); 
     const { cart } = useContext(CartContext);
     const [searchDropDown, setSearchDropDown] = useState(false);
@@ -22,7 +20,6 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
         setOpen(!open);
     }
 
-    const dropDownRef = useRef(null);
     const searchRef = useRef(null);
     const sidebarRef = useRef(null);
 
@@ -46,9 +43,6 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
                 setSearchDropDown(false);
             }
 
-            if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
-                setDropDown(false);
-            }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -89,19 +83,11 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
         setSearchDropDown(false);
     };
 
-    const toggleDropdown = () => {
-        setDropDown(!dropDown);
-    }
-
-    const selectCategory = (category) => {
-        setSelectedCategory(category);
-        setDropDown(false);
-        onCategorySelect(category);
-    };
+    const navigate = useNavigate();
 
     const handleSearchClick = () => {
         if (search.trim() !== '') {
-            onSearch(search);
+            navigate(`/search/${search.trim()}`);
         }
     };
 
@@ -120,25 +106,6 @@ const Navbar = ({ onCategorySelect, onSearch }) => {
                         <NavLink to="/Deals-for-Today">Deals for today</NavLink>
                         <NavLink to="/Best-sellers">Best sellers</NavLink>
                     </nav>
-                    <div className="categories-box" ref={dropDownRef}>
-                        <button type="button" onClick={toggleDropdown}>
-                            <p>{selectedCategory}</p>
-                            <MdArrowDropDown size={20} />
-                        </button>
-                        {dropDown && (
-                            <div className={`categories-list ${dropDown ? 'active-drop-down' : 'inactive-drop-down'}`}>
-                                <ul>
-                                    <li onClick={() => selectCategory('All')}>All</li>
-                                    <li onClick={() => selectCategory('Fiction')}>Fiction</li>
-                                    <li onClick={() => selectCategory('Art')}>Art</li>
-                                    <li onClick={() => selectCategory('Business')}>Business</li>
-                                    <li onClick={() => selectCategory('Fantasy')}>Fantasy</li>
-                                    <li onClick={() => selectCategory('Children')}>Children</li>
-                                    <li onClick={() => selectCategory('Non-fiction')}>Non-Fiction</li>
-                                </ul>
-                            </div>
-                        )}
-                    </div>
                     <div className="search-box">
                         <input 
                             type="text" 

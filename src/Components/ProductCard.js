@@ -50,7 +50,10 @@ const ProductCard = ({ item }) => {
                 <img className='product-rating-stars' src={`${process.env.PUBLIC_URL}/${item.rating.stars}`} alt="" />
                 <div className='product-rating-count'>{item.rating.count}</div>
             </div>
-            <div className="price">${formatCurrency(item.priceCents)}</div>
+            <div className="price-box">
+                <div className='price'>${formatCurrency(item.priceCents)}</div>
+                {item.discount && <div className='discount'>{item.discount && item.discount}</div>}
+            </div>
             <div className="product-quantity-container">
                 <select 
                     className="quantity-selector" 

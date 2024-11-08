@@ -48,8 +48,6 @@ const Preview = () => {
         ? products.filter((item) => item.category[1] === product.category[1] && item.id !== product.id)
         : [];
 
-        console.log(related_products);
-
     return (
         <>
             <Navbar />
@@ -80,7 +78,10 @@ const Preview = () => {
                                     <img className="product-rating-stars" src={`${process.env.PUBLIC_URL}/${product.rating.stars}`} alt="" />
                                     <div className="product-rating-count">{product.rating.count}</div>
                                 </div>
-                                <div className="preview-price">${formatCurrency(product.priceCents)}</div>
+                                <div className="preview-price">
+                                    ${formatCurrency(product.priceCents)}
+                                    {product.discount && <div className='preview-discount'>{product.discount && product.discount}</div>}
+                                </div>
                                 <div className="preview-quantity-container">
                                     <select
                                         className="quantity-selector"
