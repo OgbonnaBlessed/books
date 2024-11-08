@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import Navbar from '../Components/Navbar';
 import products from "../Data/Data.json";
 import { Link, useParams } from 'react-router-dom';
 import { WishListContext } from '../Context/WishListContext'; // Import the context
@@ -8,6 +7,7 @@ import { CartContext } from '../Context/CartContext';
 import ProductCard from '../Components/ProductCard';
 import formatCurrency from '../utils/format';
 import { ChevronRight } from 'lucide-react'
+import { motion } from 'framer-motion';
 
 const Preview = () => {
     const [clickedItems, setClickedItems] = useState({});
@@ -50,66 +50,95 @@ const Preview = () => {
 
     return (
         <>
-            <Navbar />
-                {product && (
-                    <div className="preview-container">
-                        <div className='bread-crumb'>
-                            <Link to='/'>Home</Link>
-                            <ChevronRight className='right-icon'/>
-                            <div>{product.category[0]}</div>
-                            <ChevronRight className='right-icon'/>
-                            <div>{product.name}</div>
+            {product && (
+                <motion.div 
+                    className="preview-container"
+                    initial={{
+                        opacity: 0
+                    }}
+                    animate={{
+                        opacity: 1
+                    }}
+                    exit={{
+                        opacity: 0
+                    }}
+                    transition={{ 
+                        duration: 1, 
+                        ease: "easeInOut" 
+                    }} // Smooth transition
+                >
+                    <div className='bread-crumb'>
+                        <Link to='/'>Home</Link>
+                        <ChevronRight className='right-icon'/>
+                        <div>{product.category[0]}</div>
+                        <ChevronRight className='right-icon'/>
+                        <div>{product.name}</div>
+                    </div>
+                    <div className="preview-item">
+                        <div className="preview-images">
+                            <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
+                            <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
                         </div>
-                        <div className="preview-item">
-                            <div className="preview-images">
-                                <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
-                                <img className="preview-image" src={`${process.env.PUBLIC_URL}/${product.image}`} alt="" />
+                        <div className='preview-product-info'>
+                            <h1>{product.name}</h1>
+                            <h1 className="title">{product.author}</h1>
+                            <p className="preview-description">{product.description}</p>
+                            <div className='preview-categories'>
+                                {product.category.map((category, i) => (
+                                    <div key={i}>{category}</div>
+                                ))}
                             </div>
-                            <div className='preview-product-info'>
-                                <h1>{product.name}</h1>
-                                <h1 className="title">{product.author}</h1>
-                                <p className="preview-description">{product.description}</p>
-                                <div className='preview-categories'>
-                                    {product.category.map((category, i) => (
-                                        <div key={i}>{category}</div>
+                            <div className="preview-rating-box">
+                                <img className="product-rating-stars" src={`${process.env.PUBLIC_URL}/${product.rating.stars}`} alt="" />
+                                <div className="product-rating-count">{product.rating.count}</div>
+                            </div>
+                            <div className="preview-price">
+                                ${formatCurrency(product.priceCents)}
+                                {product.discount && <div className='preview-discount'>{product.discount && product.discount}</div>}
+                            </div>
+                            <div className="preview-quantity-container">
+                                <select
+                                    className="quantity-selector"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                >
+                                    {[...Array(10).keys()].map((n) => (
+                                        <option key={n + 1} value={n + 1}>{n + 1}</option>
                                     ))}
-                                </div>
-                                <div className="preview-rating-box">
-                                    <img className="product-rating-stars" src={`${process.env.PUBLIC_URL}/${product.rating.stars}`} alt="" />
-                                    <div className="product-rating-count">{product.rating.count}</div>
-                                </div>
-                                <div className="preview-price">
-                                    ${formatCurrency(product.priceCents)}
-                                    {product.discount && <div className='preview-discount'>{product.discount && product.discount}</div>}
-                                </div>
-                                <div className="preview-quantity-container">
-                                    <select
-                                        className="quantity-selector"
-                                        value={quantity}
-                                        onChange={(e) => setQuantity(Number(e.target.value))}
-                                    >
-                                        {[...Array(10).keys()].map((n) => (
-                                            <option key={n + 1} value={n + 1}>{n + 1}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className='product-preview-actions'>
-                                    <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button>
-                                    <FaHeart
-                                        className="preview-heart-icon"
-                                        onClick={() => handleClick(product)}
-                                        style={{
-                                            color: clickedItems[product.id] ? 'rgb(219, 21, 21)' : 'white',
-                                        }}
-                                    />
-                                </div>
+                                </select>
+                            </div>
+                            <div className='product-preview-actions'>
+                                <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button>
+                                <FaHeart
+                                    className="preview-heart-icon"
+                                    onClick={() => handleClick(product)}
+                                    style={{
+                                        color: clickedItems[product.id] ? 'rgb(219, 21, 21)' : 'white',
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
-                )}
+                </motion.div>
+            )}
 
             {/* Related Products Section */}
-            <div className="related-products-container">
+            <motion.div 
+                className="related-products-container"
+                initial={{
+                    opacity: 0
+                }}
+                animate={{
+                    opacity: 1
+                }}
+                exit={{
+                    opacity: 0
+                }}
+                transition={{ 
+                    duration: 1, 
+                    ease: "easeInOut" 
+                }} // Smooth transition
+            >
                 <h1>Similar Books</h1>
                 {related_products.length > 0 
                 ?   <div className="trending-box trending-main-box">
@@ -119,7 +148,7 @@ const Preview = () => {
                     </div>
                 : <p className='no-similarity'>There's no book similar to this currently!</p>
                 }
-            </div>
+            </motion.div>
         </>
     );
 };

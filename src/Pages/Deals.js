@@ -2,6 +2,7 @@ import React from 'react';
 import products from '../Data/Data.json'
 import Navbar from '../Components/Navbar';
 import ProductCard from '../Components/ProductCard';
+import { motion } from 'framer-motion';
 
 const Deals = () => {
   const getDaySuffix = (day) => {
@@ -29,7 +30,22 @@ const Deals = () => {
   return (
     <>
     <Navbar />
-      <div className="deals-main-container">
+      <motion.div 
+        className="deals-main-container"
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+            opacity: 1
+        }}
+        exit={{
+            opacity: 0
+        }}
+        transition={{ 
+            duration: 1, 
+            ease: "easeInOut" 
+        }} // Smooth transition
+      >
         <div className="deals-container">
             <h1>Discover the best deals for today</h1>
             <p className='display-deals'>Displaying deals for: {formatDate(today)} - {formatDate(futureDate)}, + special offers</p>
@@ -39,7 +55,7 @@ const Deals = () => {
             ))}
             </div>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { motion } from 'framer-motion';
 
 const BookSwiper = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -58,7 +59,7 @@ const BookSwiper = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % books.length);
-    }, 4000); // Change slide every 3 seconds
+    }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, [books.length]);
@@ -74,15 +75,48 @@ const BookSwiper = () => {
   };
 
   return (
-    <div className="carousel-container">
-      <div className="carousel-main">
+    <motion.div   
+      className="carousel-container"
+      initial={{
+        opacity: 0
+      }}
+      animate={{
+        opacity: 1
+      }}
+      exit={{
+        opacity: 0
+      }}
+      transition={{ 
+        duration: 1, 
+        ease: "easeInOut" 
+      }} // Smooth transition
+    >
+      <motion.div 
+        className="carousel-main"
+        key={activeIndex} // Key to trigger re-render for animation
+        initial={{ opacity: 0, x: -50 }} 
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 50 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+      >
         <Link 
           className="carousel-image"
           to={`/preview/${books[activeIndex].id}`}
         >
-          <img src={books[activeIndex].image} alt={books[activeIndex].name} />
+          <img 
+            src={books[activeIndex].image} 
+            alt={books[activeIndex].name} 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          />
         </Link>
-        <div className="carousel-details">
+        <motion.div 
+          className="carousel-details"
+          initial={{ opacity: 0, x: -20 }} 
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}
+        >
           <h2>{books[activeIndex].name}</h2>
           <h3>by {books[activeIndex].author}</h3>
           <div className='description-box'>
@@ -91,16 +125,34 @@ const BookSwiper = () => {
               <div style={{ height: descriptionHeight }} className="thin-center"></div>
               <div className="round-end"></div>
             </div>
-            <p ref={descriptionRef}>{books[activeIndex].description}</p>
+            <motion.p 
+              ref={descriptionRef}
+              key={activeIndex} // Key-based for individual text change animation
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {books[activeIndex].description}
+            </motion.p>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Thumbnail slider */}
       <div className="thumbnail-container">
         <div className='quote-box'>
           <div className='top-quotation-mark'><FaQuoteLeft/></div>
-          <div className='quote'>{books[activeIndex].quote}</div>
+          <motion.div 
+            className='quote'
+            key={activeIndex} // Key-based for individual text change animation
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
+          >
+            {books[activeIndex].quote}
+          </motion.div>
           <div className='bottom-quotation-mark'><FaQuoteRight/></div>
         </div>
         <div className="carousel-thumbnail-slider">
@@ -115,7 +167,7 @@ const BookSwiper = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

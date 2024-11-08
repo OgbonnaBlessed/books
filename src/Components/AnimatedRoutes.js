@@ -10,6 +10,7 @@ import Home from '../Pages/Home';
 import Contact from '../Pages/Contact';
 import Checkout from '../Pages/Checkout';
 import { AnimatePresence } from 'framer-motion';
+import About from '../Pages/About';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const AnimatedRoutes = () => {
         <Route path="/Wish-list" element={<WishList />} />
         <Route path="/Checkout" element={<Checkout />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/About" element={<About />} />
       </Routes>
     </AnimatePresence>
   )

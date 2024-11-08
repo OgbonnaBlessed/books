@@ -65,7 +65,22 @@ const Contact = () => {
     };
 
   return (
-    <div className='contact-container'>
+    <motion.div 
+      className='contact-container'
+      initial={{
+        opacity: 0
+      }}
+      animate={{
+          opacity: 1
+      }}
+      exit={{
+          opacity: 0
+      }}
+      transition={{ 
+          duration: 1, 
+          ease: "easeInOut" 
+      }} // Smooth transition
+    >
       <div className='contact-form'>
         <div className='reach-us-text'>
             <p className='get-in-touch'>Get in Touch</p>
@@ -178,7 +193,7 @@ const Contact = () => {
           </motion.div>
         }
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 

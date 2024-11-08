@@ -7,7 +7,7 @@ const Footer = () => {
       <footer className="footer">
         <div className="footer-top">
           <div className="footer-section">
-            <h4>About Us</h4>
+            <h4>Book Field</h4>
             <p>BookField is your go-to destination for a wide range of books across genres. Discover, learn, and shop all in one place.</p>
           </div>
 
@@ -19,6 +19,7 @@ const Footer = () => {
               <li><Link to="/Best-sellers">Best Sellers</Link></li>
               <li><Link to="/Deals-for-Today">Deals</Link></li>
               <li><Link to="/Contact">Contact Us</Link></li>
+              <li><Link to="/About">About Us</Link></li>
             </ul>
           </div>
 

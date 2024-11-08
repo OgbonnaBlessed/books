@@ -26,6 +26,15 @@ const Home = () => {
         }
     };
 
+    const categoryFadeIn = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: "easeInOut" }
+        }
+    };
+
     const dropDownRef = useRef(null);
 
     useEffect(() => {
@@ -74,13 +83,34 @@ const Home = () => {
   return (
     <>
         <BookSwiper /> 
-            <div className="categories-box" ref={dropDownRef}>
+            <motion.div 
+                className="categories-box" ref={dropDownRef}
+                initial={{
+                    opacity: 0
+                }}
+                animate={{
+                    opacity: 1,
+                }}
+                exit={{
+                    opacity: 0,
+                }}
+                transition={{ 
+                    duration: 1, 
+                    ease: "easeInOut" 
+                }} // Smooth transition
+            >
                 <button type="button" onClick={toggleDropdown}>
                     <p>{selectedCategory}</p>
                     <MdArrowDropDown size={20} />
                 </button>
                 {dropDown && (
-                    <div className={`categories-list ${dropDown ? 'active-drop-down' : 'inactive-drop-down'}`}>
+                    <motion.div 
+                        className="categories-list"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: dropDown ? 1 : 0, y: dropDown ? 0 : -10 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
                         <ul>
                             <li onClick={() => selectCategory('All')}>All</li>
                             <li onClick={() => selectCategory('Fiction')}>Fiction</li>
@@ -90,9 +120,9 @@ const Home = () => {
                             <li onClick={() => selectCategory('Children')}>Children</li>
                             <li onClick={() => selectCategory('Non-fiction')}>Non-Fiction</li>
                         </ul>
-                    </div>
+                    </motion.div>
                 )}
-            </div>
+            </motion.div>
             {selectedCategory === 'All' ? 
                 <div className='content-container'>
                     <motion.div 
@@ -149,7 +179,14 @@ const Home = () => {
                     </motion.div>
                 </div>
                 
-            :   <div className='trending-main-container'>
+            :   <motion.div 
+                    className='trending-main-container'
+                    key={selectedCategory}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={categoryFadeIn}
+                >
                     <div className="trending-container">
                         <h1>{selectedCategory}</h1>
                         <div className="trending-box trending-main-box">
@@ -158,7 +195,7 @@ const Home = () => {
                         ))}
                         </div>
                     </div>
-                </div>
+                </motion.div>
            }
     </>
   )

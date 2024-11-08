@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import { CartContext } from '../Context/CartContext';
 import formatCurrency from '../utils/format';
+import { motion } from 'framer-motion';
 
 const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState({});
@@ -84,7 +85,22 @@ const Checkout = () => {
   return (
     <>
       <Navbar />
-      <div className="checkout-container">
+      <motion.div 
+        className="checkout-container"
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+            opacity: 1
+        }}
+        exit={{
+            opacity: 0
+        }}
+        transition={{ 
+            duration: 1, 
+            ease: "easeInOut" 
+        }} // Smooth transition
+      >
         <div className="product-display">
           <h1>Review your order</h1>
           <div className="product-display-container">
@@ -178,7 +194,7 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

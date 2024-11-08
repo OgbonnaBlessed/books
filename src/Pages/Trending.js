@@ -1,14 +1,27 @@
 import React from 'react';
 import ProductCard from '../Components/ProductCard'
 import products from '../Data/Data.json'
-import Navbar from '../Components/Navbar';
+import { motion } from 'framer-motion';
 
 const Trending = () => {
 
   return (
-    <>
-    <Navbar />
-    <div className="trending-main-container">
+    <motion.div 
+      className="trending-main-container"
+      initial={{
+        opacity: 0
+      }}
+      animate={{
+          opacity: 1
+      }}
+      exit={{
+          opacity: 0
+      }}
+      transition={{ 
+          duration: 1, 
+          ease: "easeInOut" 
+      }} // Smooth transition
+    >
       <div className="trending-container">
         <h1>Explore the Trending Books!</h1>
         <div className="trending-box trending-main-box">
@@ -17,8 +30,7 @@ const Trending = () => {
           ))}
         </div>
       </div>
-    </div>
-    </>
+    </motion.div>
   )
 }
 
