@@ -5,6 +5,9 @@ import ProductCard from '../Components/ProductCard';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MdArrowDropDown } from 'react-icons/md'
+import Testimonial from '../Components/Testimonial/Testimonial';
+import Choose from '../Components/Choose/Choose';
+import Newsletter from '../Components/Newsletter/Newsletter';
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState('All')
@@ -83,6 +86,8 @@ const Home = () => {
   return (
     <>
         <BookSwiper /> 
+        <Choose/>
+        <Testimonial/>
             <motion.div 
                 className="categories-box" ref={dropDownRef}
                 initial={{
@@ -197,6 +202,7 @@ const Home = () => {
                     </div>
                 </motion.div>
            }
+        <Newsletter/>
     </>
   )
 }

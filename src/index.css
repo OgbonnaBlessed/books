@@ -97,9 +97,9 @@ button:active {
 
 .categories-box {
   position: relative;
-  right: 2rem;
+  margin-right: 2rem;
   margin-top: 1rem;
-  position: absolute;
+  float: right;
 }
 
 .categories-box button {
@@ -109,8 +109,8 @@ button:active {
   justify-content: center;
   align-items: center;
   gap: 2px;
-  border-radius: 20px;
-  padding: 8px 12px;
+  border-radius: 75px;
+  padding: 10px 20px;
   font-size: 0.9rem;
   background: var(--primary-color);
   color: white;
@@ -121,8 +121,9 @@ button:active {
 
 .categories-box .categories-list {
   position: absolute;
-  top: 3.2rem;
-  left: -1.3rem;
+  top: 3rem;
+  left: -10%;
+  transform: translateX(-50%, -50%);
   background: var(--main-color);
   border: 1px solid var(--secondary-color);
   border-radius: 10px;
@@ -258,21 +259,16 @@ button:active {
 }
 
 .sign-up-box button {
-  padding: 8px 12px;
+  padding: 10px 20px;
   background: var(--primary-color);
-  /* box-shadow: 0 0 1rem var(--primary-color); */
   border: 0;
   outline: 0;
-  border-radius: 20px;
+  border-radius: 75px;
   color: white;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all .5s ease;
 }
-
-/* .sign-up-box button:hover {
-  box-shadow: 0 0 1rem 3px var(--primary-color);
-} */
 
 .shopping-cart,
 .favorite-box {
@@ -305,7 +301,7 @@ button:active {
   justify-content: space-between;
   align-items: end;
   padding: 2rem;
-  margin-top: 6rem;
+  margin: 6rem 0;
 }
 
 .carousel-main {
@@ -656,7 +652,7 @@ input:focus {
 .deals-main-container {
   width: 100%;
   min-height: 25rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 .trending-main-container .trending-container,
@@ -822,7 +818,8 @@ input:focus {
 }
 
 .wish-container {
-  margin-top: 8rem;
+  margin-top: 7rem;
+  margin-bottom: 3rem;
   width: 100%;
   min-height: 25rem;
 }
@@ -908,6 +905,11 @@ input:focus {
   margin-top: 6rem;
   padding: 1rem 0;
   padding-bottom: 2rem;
+}
+
+.checkout-container h1,
+.wish-box h1 {
+  font-family: Lora;
 }
 
 .product-display {

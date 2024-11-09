@@ -155,7 +155,7 @@ const Navbar = () => {
                         <span className='number-of-wish-items'>{wishes.length}</span>
                     </Link>
                     <div className="sign-up-box">
-                        <button type='button' className='sign-up'> sign up</button>
+                        <button type='button' className='sign-up'> Sign up</button>
                     </div>
                 </div>
             </div>
