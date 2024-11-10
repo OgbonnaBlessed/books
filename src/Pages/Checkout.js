@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Navbar from '../Components/Navbar';
 import { CartContext } from '../Context/CartContext';
 import formatCurrency from '../utils/format';
 import { motion } from 'framer-motion';
@@ -84,7 +83,6 @@ const Checkout = () => {
 
   return (
     <>
-      <Navbar />
       <motion.div 
         className="checkout-container"
         initial={{

@@ -30,7 +30,7 @@
 
 /* Dot styling */
 .slick-dots {
-    bottom: -30px;
+    bottom: -80px;
     z-index: 3; /* Ensure dots are visible above other content */
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@
 }
 
 .slick-dots li button:before {
-    font-size: 12px; /* Adjust size of the dots */
+    font-size: 8px; /* Adjust size of the dots */
     color: rgba(4, 122, 14, 0.205); /* Make dots greenish */
     opacity: 0.8; /* Make them more visible */
 }
