@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { WishListContext } from '../Context/WishListContext';
 import formatCurrency from '../utils/format';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'
 
 const WishList = () => {
     const [wishes, setWishes] = useState([]);
@@ -47,7 +48,9 @@ const WishList = () => {
                     {wishes.length > 0 ? (
                         wishes.map((wish, index) => (
                             <div key={index} className="wish-item">
-                                <img className='wish-product-image' src={`${process.env.PUBLIC_URL}/${wish.image}`} alt="" />
+                                <Link to={`/preview/${wish.id}`}>
+                                    <img className='wish-product-image' src={`${process.env.PUBLIC_URL}/${wish.image}`} alt="" />
+                                </Link>
                                 <h3>{wish.name} by <i>{wish.author}</i></h3>
                                 <div className="rating-box">
                                     <img className='product-rating-stars' src={`${process.env.PUBLIC_URL}/${wish.rating.stars}`} alt="" />

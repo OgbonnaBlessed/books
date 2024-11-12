@@ -20,8 +20,8 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/Trending" element={<Trending />} />
-        <Route path="/Deals-for-Today" element={<Deals />} />
-        <Route path="/Best-sellers" element={<Best />} />
+        <Route path="/Deals for Today" element={<Deals />} />
+        <Route path="/Best sellers" element={<Best />} />
         <Route path="/Preview/:productId" element={<Preview />} />
         <Route path="/search/:query" element={<Search />} />
         <Route path="/Wish-list" element={<WishList />} />

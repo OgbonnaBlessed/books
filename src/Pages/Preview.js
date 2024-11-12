@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import products from "../Data/Data.json";
 import { Link, useParams } from 'react-router-dom';
@@ -12,9 +12,14 @@ import { motion } from 'framer-motion';
 const Preview = () => {
     const [clickedItems, setClickedItems] = useState({});
     const [quantity, setQuantity] = useState(1); // Initialize quantity as 1
-    const { addToWishList, removeFromWishList } = useContext(WishListContext); // Use the context
+    const { addToWishList, removeFromWishList, wishes } = useContext(WishListContext);
     const { handleAddToCart } = useContext(CartContext);
     const { productId } = useParams();
+
+    useEffect(() => {
+        const storedClickedItems = JSON.parse(localStorage.getItem('clickedItems')) || {};
+        setClickedItems(storedClickedItems);
+    }, [wishes]);
 
     const handleAddToCartClick = (product) => {
         const productWithQuantity = { ...product, quantity }; 
@@ -70,7 +75,9 @@ const Preview = () => {
                     <div className='bread-crumb'>
                         <Link to='/'>Home</Link>
                         <ChevronRight className='right-icon'/>
-                        <div>{product.category[0]}</div>
+                        <Link to={`/${product.category[0]}`}>
+                            {product.category[0]}
+                        </Link>
                         <ChevronRight className='right-icon'/>
                         <div>{product.name}</div>
                     </div>
@@ -124,7 +131,7 @@ const Preview = () => {
 
             {/* Related Products Section */}
             <motion.div 
-                className="related-products-container"
+                className="related-products-container trending-main-container"
                 initial={{
                     opacity: 0
                 }}

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../Context/CartContext';
 import formatCurrency from '../utils/format';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState({});
@@ -108,30 +109,34 @@ const Checkout = () => {
                   <h2>{formatDate(new Date())}</h2>
                   <div className="product-info">
                     <div className="product-details">
-                      <img src={`${process.env.PUBLIC_URL}/${item.image}`} alt="" />
+                      <Link to={`/preview/${item.id}`}>
+                        <img src={`${process.env.PUBLIC_URL}/${item.image}`} alt={item.name} />
+                      </Link>
                       <div className="product-further-info">
                         <div className="name">{item.name}</div>
                         <div className="price">${formatCurrency(item.priceCents)}</div>
                         <div className="quantity">
                           <p>Quantity:</p>
-                          <select
-                            value={item.quantity}
-                            onChange={(e) => handleUpdateQuantity(item.id, Number(e.target.value))}
-                          >
-                            {[...Array(10).keys()].map((n) => (
-                              <option key={n + 1} value={n + 1}>
-                                {n + 1}
-                              </option>
-                            ))}
-                          </select>
-                          <button type="button" onClick={() => handleDeleteItem(item.id)}>
-                            Delete
-                          </button>
+                          <div className='quantity-change'>
+                            <select
+                              value={item.quantity}
+                              onChange={(e) => handleUpdateQuantity(item.id, Number(e.target.value))}
+                            >
+                              {[...Array(10).keys()].map((n) => (
+                                <option key={n + 1} value={n + 1}>
+                                  {n + 1}
+                                </option>
+                              ))}
+                            </select>
+                            <button type="button" onClick={() => handleDeleteItem(item.id)}>
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div className="delivery-options">
-                      <h3>Choose a delivery option.</h3>
+                      <h3>Choose a delivery option</h3>
                       <div className="delivery-options-box">
                         {Object.entries(deliveryOptions).map(([key, option]) => (
                           <div key={key} className="option">

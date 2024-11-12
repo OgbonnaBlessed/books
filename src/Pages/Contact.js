@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { BsEnvelope } from 'react-icons/bs'
-import { FaHome, FaPhone, FaTimes } from 'react-icons/fa'
+import React, { useState, useEffect } from 'react'
+import { FaEnvelope, FaHome, FaPhone, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import emailjs from '@emailjs/browser';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,7 +61,19 @@ const Contact = () => {
           setModalMessage('Something went wrong. Please try again later.');
           setShowModal(true);
         });
-    };
+  };
+
+  useEffect(() => {
+    if (showModal) {
+      const timer = setTimeout(() => {
+        setShowModal(false);
+
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+
+  }, [showModal]);
 
   return (
     <motion.div 
@@ -83,9 +94,9 @@ const Contact = () => {
     >
       <div className='contact-form'>
         <div className='reach-us-text'>
-            <p className='get-in-touch'>Get in Touch</p>
-            <div>Let's Chat, Reach Out To Us</div>
-            <p>Have questions or feedback? We are here to help. Send us a message, and we'll reply in the next 24 hours.</p>
+          <p className='get-in-touch'>Get in Touch</p>
+          <div>Let's Chat, Reach Out To Us</div>
+          <p>Have questions or feedback? We are here to help. Send us a message, and we'll reply in the next 24 hours.</p>
         </div>
         <form className='input-container' onSubmit={handleSubmit}>
             <div className="name-box">
@@ -151,7 +162,7 @@ const Contact = () => {
         <img src={`${process.env.PUBLIC_URL}/images/contact-us.jpeg`} alt="" />
         <div className='more-contact-details'>
             <div className='_more-contact-details'>
-                <BsEnvelope className='contact-icon-1'/>
+                <FaEnvelope className='contact-icon-1'/>
                 <div>
                     <p>Email</p>
                     <p>bookfield@support.com</p>

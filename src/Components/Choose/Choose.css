@@ -51,7 +51,8 @@
 
 .why-choose-us li {
     display: flex;
-    align-items: center;
+    align-items: start;
+    text-align: start;
     gap: 10px;
     padding: 10px 0;
     margin: 10px 0;
@@ -69,10 +70,17 @@
 }
 
 /* Responsive Design */
+@media (max-width: 600px) {
+    .why-choose-us-container h1 {
+        font-size: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .why-choose-us-box {
         flex-direction: column;
         text-align: center;
+        align-items: center;
     }
 
     .why-choose-us-box img {

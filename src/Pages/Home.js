@@ -162,7 +162,7 @@ const Home = () => {
 
                         </div>
 
-                        <Link to='/Best-sellers' className='see-more'>see more</Link>
+                        <Link to='/Best sellers' className='see-more'>see more</Link>
                     </motion.div>
 
                     <motion.div 
@@ -180,7 +180,7 @@ const Home = () => {
                             ))}
                         </div>
 
-                        <Link to='/Deals-for-Today' className='see-more'>see more</Link>
+                        <Link to='/Deals for Today' className='see-more'>see more</Link>
                     </motion.div>
                 </div>
                 
