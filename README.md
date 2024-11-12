@@ -1,6 +1,8 @@
-# ONLINE-BOOK-STORE - Books
+![Book_Field](https://github.com/user-attachments/assets/cae57655-9728-4522-81ed-e565232d67c7)
 
-Welcome to Books, a React.js-based e-commerce platform where users can browse, search, and purchase books from various categories. The application is designed to provide an intuitive shopping experience with features like a dynamic carousel, a category-based filtering, addition of items to a wishlist, and a fully functional shopping cart.
+# Book Field
+
+Welcome to Book field, a React.js-based e-commerce platform where users can browse, search, and purchase books from various categories. The application is designed to provide an intuitive shopping experience with features like a dynamic carousel, a category-based filtering, addition of items to a wishlist, and a fully functional shopping cart.
 
 ## Table of Contents
 
@@ -21,7 +23,7 @@ Welcome to Books, a React.js-based e-commerce platform where users can browse, s
 
 ## overview
 
-Books is a comprehensive platform where users can:
+Book Field is a comprehensive platform where users can:
 
 - Search and purchase books.
 - Explore books by categories.
@@ -32,12 +34,12 @@ The project is built with React and is designed to be fully responsive across di
 
 ## Features
 
-- *Dynamic Carousel:* Displays the latest and trending books with their titles and descriptions.
+- *Dynamic Carousel:* Displays the latest and trending books with their titles, authors, quotes and descriptions.
 - *Search Functionality:* Allows users to search for books by title or author.
 - *Category Filtering:* Users can filter books by categories like Trending, Best Sellers, and Deals for Today.
 - *Quantity Selector:* Users can select the quantity of each book before adding it to the cart.
-- *Wishlist:* Toggle the heart icon to add or remove books from the wishlist.
-- *Cart Management:* Easily add books to the cart, with the option to update quantities or remove items.
+- *Wishlist:* Users can add books to their wish list by toggling the heart icon to add or remove books from the wishlist.
+- *Cart Management:* Users can easily add books to the cart, with the option to update quantities or remove items.
 - *Responsive Design:* Optimized for both desktop and mobile devices.
 
 ## Demo
